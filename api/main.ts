@@ -62,6 +62,7 @@ router.post("/login", async (context) => {
             message: "Login successful",
         };
     } catch (error) {
+        console.log("error[65]: ", error);
         contextResponse = {
             status: 400,
             data: {},
@@ -102,6 +103,7 @@ router.post("/login", async (context) => {
         };
         // ----------------------------------------------------
     } catch (error) {
+        console.log("error[106]: ", error);
         contextResponse = {
             status: 400,
             data: {},
