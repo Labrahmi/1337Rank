@@ -26,8 +26,8 @@ interface Promo {
 }
 
 // Initialize the databases
-const campusDB = new Database("db/campus.json");
-const promoDB = new Database("db/promo.json");
+const campusDB = new Database("api/db/campus.json");
+const promoDB = new Database("api/db/promo.json");
 
 // Create a router
 const router = new Router();
