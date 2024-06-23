@@ -4,7 +4,7 @@ import '../App.css'
 function Login() {
 
     let client_id = 'u-s4t2ud-d872ed6904ddf535135836257e87653a534dad2f6b0b41e1ff7ff40597923994';
-    let redirect_uri = 'https://yousseflabr-1337rank-31.deno.dev/callback';
+    let redirect_uri = 'https://1337-rank-app.deno.dev/callback';
     let url = `https://api.intra.42.fr/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code`;
 
     return (
