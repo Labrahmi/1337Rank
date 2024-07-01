@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    ports:
+      - 8000:8000
+    env_file:
+      - backend/.env
+
+  frontend:
+    image: node:18.19.0
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    command: bash -c "npm install && npm run dev --host"
+    ports:
+      - 80:5173 # host:container
+    env_file:
+      - backend/.env
+    depends_on:
+      - backend

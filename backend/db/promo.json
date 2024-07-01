@@ -1,0 +1,65 @@
+[
+	{
+		"pool_year": 2022,
+		"pool_month": "May",
+		"begin_at": "2022-05-16T10:55:10.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
+	},
+	{
+		"pool_year": 2022,
+		"pool_month": "March",
+		"begin_at": "2022-03-21T09:00:00.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
+	},
+	{
+		"pool_year": 2023,
+		"pool_month": "October",
+		"begin_at": "2023-10-09T08:37:00.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
+	},
+	{
+		"pool_year": 2023,
+		"pool_month": "August",
+		"begin_at": "2023-08-14T08:37:00.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
+	},
+	{
+		"pool_year": 2023,
+		"pool_month": "September",
+		"begin_at": "2023-09-11T08:37:00.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
+	},
+	{
+		"pool_year": 2022,
+		"pool_month": "May",
+		"begin_at": "2022-05-09T08:00:00.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
+	},
+	{
+		"pool_year": 2024,
+		"pool_month": "June",
+		"begin_at": "2024-06-24T08:37:00.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
+	}
+]

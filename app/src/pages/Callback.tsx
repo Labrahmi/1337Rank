@@ -13,7 +13,7 @@ function Callback() {
                 navigate('/login');
                 return;
             }
-            var response = await fetch(`http://0.0.0.0:8000/login`, {
+            let response = await fetch(`http://10.11.248.228:8000/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ function Callback() {
                 navigate('/login');
             }
         }
-        let code = new URLSearchParams(location.search).get('code');
+        const code = new URLSearchParams(location.search).get('code');
         fetchUser(code || 'null');
     }, []);
 

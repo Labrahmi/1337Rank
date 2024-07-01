@@ -69,7 +69,8 @@ router.post("/login", async (context) => {
             message: error,
         };
     }
-    const token = (contextResponse.data as { access_token: string }).access_token;
+    const token =
+        (contextResponse.data as { access_token: string }).access_token;
     try {
         const me = await fetch(`${BASE_URL}/v2/me`, {
             method: "GET",
@@ -86,7 +87,9 @@ router.post("/login", async (context) => {
             const begin_at_date = new Date(begin_at);
             const newPromo: Promo = {
                 pool_year: begin_at_date.getUTCFullYear(),
-                pool_month: begin_at_date.toLocaleString('default', { month: 'long' }),
+                pool_month: begin_at_date.toLocaleString("default", {
+                    month: "long",
+                }),
                 begin_at: begin_at,
                 Campus: {
                     id: campus.id,
@@ -103,7 +106,7 @@ router.post("/login", async (context) => {
         };
         // ----------------------------------------------------
     } catch (error) {
-        console.log("error[106]: ", error);
+        console.log("error[109]: ", error);
         contextResponse = {
             status: 400,
             data: {},
@@ -113,6 +116,73 @@ router.post("/login", async (context) => {
     context.response.body = contextResponse;
 });
 
+const getCampusId = async (campus_name: String, token: String) => {
+    const endPoint: String = "/v2/campus?filter[country]=Morocco";
+    try {
+        const response = await fetch(`${BASE_URL}${endPoint}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        const campus = data.find((campus: any) => campus.name === campus_name);
+        if (campus === undefined) {
+            return (55); // Default campus id
+        }
+        return (campus.id);
+    } catch (error) {
+        return (55); // Default campus id
+    }
+};
+
+// create a route
+router.post("/cursus_users", async (context) => {
+    const body = await context.request.body().value;
+    const firstDay = body.query.firstDay;
+    const lastDay = body.query.lastDay;
+    const page = body.query.page;
+    const token = body.query.token;
+    const currentPage = body.query.currentPage;
+    const campus_name = body.query.campus_name;
+    // 
+    const campus_id: Number = await getCampusId(campus_name || 'Tétouan', token); 
+    const endPoint: String = `/v2/cursus/9/cursus_users?filter[campus_id]=${campus_id}&range[begin_at]=${firstDay},${lastDay}&page=${page}&per_page=100&sort=-level`;
+    try {
+        const response = await fetch(`${BASE_URL}${endPoint}`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await response.json();
+        var i = currentPage * 100 - 99;
+        let tempUsers = data.map((user: any) => {
+            return {
+                id: user.user.id,
+                order: i++,
+                login: user.user.login,
+                image: user.user.image.versions.medium,
+                lvl: user.level.toFixed(2),
+            };
+        });
+        context.response.body = {
+            status: 200,
+            data: tempUsers,
+            message: "Users fetched successfully",
+        };
+    } catch (error) {
+        console.log("error[177]: ", error);
+        context.response.body = {
+            status: 400,
+            data: {},
+            message: error,
+        };
+    }
+});
+
 // Create your Deno application
 const app = new Application();
 app.use(oakCors());
@@ -120,5 +190,5 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 // Start the server
-console.log("Server is running on http://localhost:8000");
+console.log("Server is running on http://10.11.248.228:8000");
 await app.listen({ port: 8000 });

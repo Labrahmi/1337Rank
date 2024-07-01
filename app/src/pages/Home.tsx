@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import '../App.css'
 
@@ -11,10 +10,7 @@ interface User {
     lvl: number;
 }
 
-const baseURL: String = "https://api.intra.42.fr";
-
 function Home() {
-    const navigate = useNavigate();
     const [users, setUsers] = useState([] as User[]);
     const [currentPage, setCurrentPage] = useState(1);
     const [nextPage, setNextPage] = useState(1);
@@ -23,28 +19,7 @@ function Home() {
     var { campus_name, begin_at } = useParams();
     const [searchParams] = useSearchParams();
     const token: String = localStorage.getItem('token') || '';
-    // ------------------------------------------------------------------------------------------------
-    const getCampusId = async (campus_name: String) => {
-        const endPoint: String = "/v2/campus?filter[country]=Morocco";
-        try {
-            const response = await fetch(`${baseURL}${endPoint}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-            const data = await response.json();
-            const campus = data.find((campus: any) => campus.name === campus_name);
-            if (campus === undefined) {
-                return (55); // Default campus id
-            }
-            return (campus.id);
-        } catch (error) {
-            return (55); // Default campus id
-        }
-    };
-    // ------------------------------------------------------------------------------------------------
+
     useEffect(() => {
         const page = searchParams.get('page') || "1";
         setCurrentPage(parseInt(page));
@@ -53,37 +28,34 @@ function Home() {
             setPrevPage(parseInt(page) - 1);
         }
         const fetchUsers = async () => {
-            const campus_id: Number = await getCampusId(campus_name || 'Tétouan');
-            begin_at = begin_at || 'null';
-
-            let date = new Date(begin_at);
+            const endPoint: String = `http://10.11.248.228:8000/cursus_users`;
+            let date = new Date(begin_at || new Date().toISOString());
             let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).toISOString();
             let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString();
-
-            const endPoint: String = `/v2/cursus/9/cursus_users?filter[campus_id]=${campus_id}&range[begin_at]=${firstDay},${lastDay}&page=${page}&per_page=100&sort=-level`;
+            let body = {
+                query: {
+                    firstDay: firstDay,
+                    lastDay: lastDay,
+                    page: page,
+                    token: token,
+                    currentPage: currentPage,
+                    campus_name: campus_name,
+                }
+            };
             try {
-                const response = await fetch(`${baseURL}${endPoint}`, {
-                    method: 'GET',
+                const response = await fetch(`${endPoint}`, {
+                    method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify(body)
                 });
                 const data = await response.json();
-                var i = currentPage * 100 - 99;
-                let tempUsers = data.map((user: any) => {
-                    return {
-                        id: user.user.id,
-                        order: i++,
-                        login: user.user.login,
-                        image: user.user.image.versions.medium,
-                        lvl: user.level.toFixed(2),
-                    }
-                });
-                setUsers(tempUsers);
+                console.log(data.data);
+                setUsers(data.data);
             } catch (error) {
+                console.log("error[57]: ", error);
                 setUsers([]);
-                navigate('/login');
             }
             setTimeout(() => {
                 if (loading.current) {
@@ -99,26 +71,20 @@ function Home() {
             <main className='flex flex-col justify-between md:max-w-2xl m-auto min-h-screen'>
                 {/*  */}
                 <div className='z-10 py-4 bg-black bg-opacity-90 flex justify-center items-center gap-32 fixed w-full left-0 bottom-0 backdrop-blur-sm'>
-                    {/* ------------------------- */}
                     <div className='flex justify-center items-center'>
                         <select className='py-2 bg-transparent cursor-pointer outline-none hover:text-white transition-all duration-200 ease-in-out text-center min-w-32 p-2 rounded-xl appearance-none ' name="" id="">
                             <option className='' value="Tétouan">Tétouan</option>
                         </select>
-                        <select onChange={(e) => {
-                            location.href = `/Tétouan/${e.target.value}`;
-                        }} className='py-2 bg-transparent cursor-pointer outline-none hover:text-white transition-all duration-200 ease-in-out text-center min-w-32 p-2 rounded-xl appearance-none ' name="" id="">
+                        <select onChange={(e) => { location.href = `/Tétouan/${e.target.value}`; }} className='py-2 bg-transparent cursor-pointer outline-none hover:text-white transition-all duration-200 ease-in-out text-center min-w-32 p-2 rounded-xl appearance-none ' name="" id="">
                             <option className='' value="0">Promo</option>
                             <option className='' value="2024-06">2024-06</option>
-                            {/*  */}
                             <option className='' value="2023-10">2023-10</option>
                             <option className='' value="2023-09">2023-09</option>
                             <option className='' value="2023-08">2023-08</option>
-                            {/*  */}
                             <option className='' value="2022-05">2022-05</option>
                             <option className='' value="2022-03">2022-03</option>
                         </select>
                     </div>
-                    {/* ------------------------- */}
                     <div className='select-none'>
                         <div className='flex justify-center items-center gap-4'>
                             <a onClick={(e) => {
@@ -142,7 +108,6 @@ function Home() {
                             </a>
                         </div>
                     </div>
-                    {/* ------------------------- */}
                 </div>
                 <div className='p-4 flex flex-col gap-2 md:pt-32 pt-16 md:text-5xl text-xl text-left font-thin'>Tartib dial poolers hh</div>
                 <div className='md:p-4 flex flex-col text-sm md:text-base md:py-16'>
