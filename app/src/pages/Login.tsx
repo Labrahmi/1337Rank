@@ -3,8 +3,8 @@ import '../App.css'
 
 function Login() {
 
-    let client_id = 'u-s4t2ud-d872ed6904ddf535135836257e87653a534dad2f6b0b41e1ff7ff40597923994';
-    let redirect_uri = 'http://10.11.248.228/callback';
+    let client_id = 'u-s4t2ud-f2084b586a03222e300f054dea0cb1b9bd25e9c8c0432659fd94fd037d1bd592';
+    let redirect_uri = 'http://localhost/callback';
     let url = `https://api.intra.42.fr/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code`;
 
     return (
