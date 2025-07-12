@@ -28,7 +28,7 @@ function Home() {
       setPrevPage(parseInt(page) - 1);
     }
     const fetchUsers = async () => {
-      const endPoint: String = `http://localhost:8000/cursus_users`;
+      const endPoint: String = `${import.meta.env.VITE_PUBLIC_API_URL}/cursus_users`;
       let date = new Date(begin_at || new Date().toISOString());
       let firstDay = new Date(
         date.getFullYear(),
@@ -74,18 +74,24 @@ function Home() {
     fetchUsers();
   }, []);
 
-  let compusList = ["Tétouan", "Khouribga", "Benguerir", "Rabat"];
+  // let compusList = ["Tétouan", "Change URL bla ma t3dbni"];
 
-  let staticPromoList = [
-    "2024-08",
-    "2024-07",
-    "2024-06",
-    "2023-10",
-    "2023-09",
-    "2023-08",
-    "2022-05",
-    "2022-03",
-  ];
+  let staticPromoList: { [key: string]: string } = {
+    "2025-09": "2025-09",
+    "2025-08": "2025-08",
+    "2025-07": "2025-07",
+    "spliter-1": "---",
+    "2024-08": "2024-08",
+    "2024-07": "2024-07",
+    "2024-06": "2024-06",
+    "spliter-2": "---",
+    "2023-10": "2023-10",
+    "2023-09": "2023-09",
+    "2023-08": "2023-08",
+    "spliter-3": "---",
+    "2022-05": "2022-05",
+    "2022-03": "2022-03",
+  };
 
   return (
     <>
@@ -98,17 +104,18 @@ function Home() {
               name=""
               id=""
             >
-              {compusList.map((campus) => (
-                <option key={campus} value={campus}>
-                  {campus}
-                </option>
-              ))}
+              <option key={"Tétouan"} value={"Tétouan"}>
+                {"Tétouan"}
+              </option>
+              <option disabled key={"URI"} value={"URI"}>
+                {"URI"}
+              </option>
             </select>
             <select
               onChange={(e) => {
                 location.href = `/Tétouan/${e.target.value}`;
               }}
-              className="py-2 bg-transparent cursor-pointer outline-none hover:text-white transition-all duration-200 ease-in-out text-center min-w-32 p-2 rounded appearance-none "
+              className="py-2 bg-transparent cursor-pointer outline-none hover:text-white transition-all duration-200 ease-in-out text-center min-w-32 p-2 rounded appearance-none"
               name=""
               id=""
             >
@@ -116,12 +123,18 @@ function Home() {
                 Promo
               </option>
 
-              {staticPromoList.map((promo) => (
-                <option key={promo} value={promo}>
-                  {promo}
-                </option>
-              ))}
+              {Object.entries(staticPromoList).map(([key, value]) => {
+                if (value === "---") {
+                  return <option disabled key={key} value={value}>{value}</option>;
+                }
+                return (
+                  <option key={key} value={value}>
+                    {value}
+                  </option>
+                );
+              })}
             </select>
+
           </div>
           <div className="select-none">
             <div className="flex justify-center items-center gap-4">

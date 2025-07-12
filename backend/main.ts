@@ -146,7 +146,14 @@ router.post("/cursus_users", async (context) => {
   const currentPage = body.query.currentPage;
   const campus_name = body.query.campus_name;
   //
-  const campus_id: Number = await getCampusId(campus_name || "Tétouan", token);
+  // const campus_id: Number = await getCampusId(campus_name || "Tétouan", token);
+  const CAMPUS_ID_MAP: { [key: string]: number } = {
+    "Khouribga": 16,
+    "Benguerir": 21,
+    "Tétouan": 55,
+    "Rabat": 75,
+  };
+  const campus_id = CAMPUS_ID_MAP[campus_name as string] || 55; // Default to Tétouan if not found
   const endPoint: String = `/v2/cursus/9/cursus_users?filter[campus_id]=${campus_id}&range[begin_at]=${firstDay},${lastDay}&page=${page}&per_page=100&sort=-level`;
   try {
     const response = await fetch(`${BASE_URL}${endPoint}`, {
@@ -157,16 +164,13 @@ router.post("/cursus_users", async (context) => {
       },
     });
     const data = await response.json();
-    var i = currentPage * 100 - 99;
-    let tempUsers = data.map((user: any) => {
-      return {
-        id: user.user.id,
-        order: i++,
-        login: user.user.login,
-        image: user.user.image.versions.medium,
-        lvl: user.level.toFixed(2),
-      };
-    });
+    const tempUsers = data.map((user: any, index: number) => ({
+      id: user.user.id,
+      order: currentPage * 100 - 99 + index,  // Pure calculation
+      login: user.user.login,
+      image: user.user.image.versions.medium,
+      lvl: user.level.toFixed(2),
+    }));
     context.response.body = {
       status: 200,
       data: tempUsers,

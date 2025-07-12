@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom'
 import '../App.css'
 
 function Login() {
-
-    let client_id = 'u-s4t2ud-f2084b586a03222e300f054dea0cb1b9bd25e9c8c0432659fd94fd037d1bd592';
-    let redirect_uri = 'http://localhost/callback';
+    let client_id = import.meta.env.VITE_CLIENT_ID;
+    let redirect_uri = import.meta.env.VITE_REDIRECT_URI;
     let url = `https://api.intra.42.fr/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code`;
 
     return (

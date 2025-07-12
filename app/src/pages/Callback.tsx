@@ -13,7 +13,9 @@ function Callback() {
                 navigate('/login');
                 return;
             }
-            let response = await fetch(`http://localhost:8000/login`, {
+            let endPoint = `${import.meta.env.VITE_PUBLIC_API_URL}/login`;
+            console.log(endPoint);
+            let response = await fetch(endPoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
