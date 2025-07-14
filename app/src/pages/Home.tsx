@@ -150,7 +150,7 @@ function Home() {
         setUsers(data.data);
       } catch (error) {
         console.log("error in fetchUsers: ", error);
-        setUsers(mockUsers);
+        setUsers([]);
       }
       setTimeout(() => {
         if (loading.current) {
@@ -182,12 +182,12 @@ function Home() {
 
   return (
     <>
-      <main className="flex flex-col justify-between md:max-w-2xl m-auto min-h-screen">
+      <main className="flex flex-col justify-between md:max-w-2xl md:p-0 p-6 m-auto min-h-screen">
         {/*  */}
-        <div className="z-10 py-4 bg-black bg-opacity-90 flex justify-center items-center gap-32 fixed w-full left-0 bottom-0 backdrop-blur-sm">
+        <div className="z-10 py-4 bg-black bg-opacity-90 flex md:justify-center justify-between px-4 items-center gap-32 fixed w-full left-0 bottom-0 backdrop-blur-sm">
           <div className="flex justify-center items-center">
             <select
-              className="py-2 bg-transparent cursor-pointer outline-none hover:text-white transition-all duration-200 ease-in-out text-center min-w-32 p-2 rounded appearance-none "
+              className="py-2 hidden md:block bg-transparent cursor-pointer outline-none hover:text-white transition-all duration-200 ease-in-out text-center min-w-32 p-2 rounded appearance-none "
               name=""
               id=""
             >
@@ -202,7 +202,7 @@ function Home() {
               onChange={(e) => {
                 location.href = `/Tétouan/${e.target.value}`;
               }}
-              className="py-2 bg-transparent cursor-pointer outline-none hover:text-white transition-all duration-200 ease-in-out text-center min-w-32 p-2 rounded appearance-none"
+              className="py-2 bg-transparent cursor-pointer outline-none hover:text-white transition-all duration-200 ease-in-out text-center md:min-w-32 rounded appearance-none"
               name=""
               id=""
             >
@@ -275,9 +275,10 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="p-4 flex flex-col gap-2 md:pt-32 pt-16 md:text-5xl text-xl text-left font-thin">
+        <div className="p-4 flex flex-col gap-2 md:pt-32 pt-16 md:text-5xl text-3xl text-left font-thin">
           Tartib dial poolers hh
         </div>
+        <div className="flex py-4 border-t border-t-zinc-50/10"></div>
         <div className="md:p-4 flex flex-col text-sm md:text-base md:py-16 gap-3">
           {/* if users is empty */}
           {users.length === 0 && (
@@ -300,7 +301,7 @@ function Home() {
               href={`https://profile.intra.42.fr/users/${user.login}`}
               key={user.order}
               className={
-                "group flex items-center justify-between font-normal py-2 md:px-4 px-8 hover:text-white border border-zinc-50/10 rounded-lg bg-zinc-500/25 hover:bg-zinc-600 backdrop-blur-xl select-none transition-all duration-200 delay-0 hover:shadow-lg hover:shadow-white/10"
+                "group flex items-center justify-between font-normal py-2 md:px-6 px-4 hover:text-white border border-zinc-50/10 rounded-lg bg-zinc-500/25 hover:bg-zinc-600 backdrop-blur-xl select-none transition-all duration-200 delay-0 hover:shadow-lg hover:shadow-white/10"
               }
             >
               <div className="flex gap-4 justify-start items-center">
