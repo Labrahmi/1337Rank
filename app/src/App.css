@@ -1,10 +1,8 @@
 #root {
-  /* max-width: 1280px; */
-  /* margin: 0 auto; */
   text-align: center;
-  background: #040D12;
   color: #93B1A6;
-  background-image: url('/chess-8348280_trans.png');
+  background-image: url('/chess-8348280.jpeg');
+  background-size: cover;
   background-repeat: repeat;
   background-position: center;
 }

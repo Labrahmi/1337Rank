@@ -10,6 +10,93 @@ interface User {
   lvl: number;
 }
 
+const mockUsers: User[] = [
+  {
+    order: 1,
+    login: "user_1",
+    image: "/profile.png",
+    lvl: 42,
+  },
+  {
+    order: 2,
+    login: "user_2",
+    image: "/profile.png",
+    lvl: 36,
+  },
+  {
+    order: 3,
+    login: "user_3",
+    image: "/profile.png",
+    lvl: 28,
+  },
+  {
+    order: 4,
+    login: "user_4",
+    image: "/profile.png",
+    lvl: 30,
+  },
+  {
+    order: 5,
+    login: "user_5",
+    image: "/profile.png",
+    lvl: 45,
+  },
+  {
+    order: 6,
+    login: "user_6",
+    image: "/profile.png",
+    lvl: 50,
+  },
+  {
+    order: 7,
+    login: "user_7",
+    image: "/profile.png",
+    lvl: 55,
+  },
+  {
+    order: 8,
+    login: "user_8",
+    image: "/profile.png",
+    lvl: 60,
+  },
+  {
+    order: 9,
+    login: "user_9",
+    image: "/profile.png",
+    lvl: 65,
+  },
+  {
+    order: 10,
+    login: "user_10",
+    image: "/profile.png",
+    lvl: 70,
+  },
+  {
+    order: 11,
+    login: "user_11",
+    image: "/profile.png",
+    lvl: 75,
+  },
+  {
+    order: 12,
+    login: "user_12",
+    image: "/profile.png",
+    lvl: 80,
+  },
+  {
+    order: 13,
+    login: "user_13",
+    image: "/profile.png",
+    lvl: 85,
+  },
+  {
+    order: 14,
+    login: "user_14",
+    image: "/profile.png",
+    lvl: 90,
+  },
+]
+
 function Home() {
   const [users, setUsers] = useState([] as User[]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -59,11 +146,11 @@ function Home() {
           body: JSON.stringify(body),
         });
         const data = await response.json();
-        console.log(data.data);
+        // console.log(data.data);
         setUsers(data.data);
       } catch (error) {
-        console.log("error[57]: ", error);
-        setUsers([]);
+        console.log("error in fetchUsers: ", error);
+        setUsers(mockUsers);
       }
       setTimeout(() => {
         if (loading.current) {
@@ -191,7 +278,7 @@ function Home() {
         <div className="p-4 flex flex-col gap-2 md:pt-32 pt-16 md:text-5xl text-xl text-left font-thin">
           Tartib dial poolers hh
         </div>
-        <div className="md:p-4 flex flex-col text-sm md:text-base md:py-16 gap-2">
+        <div className="md:p-4 flex flex-col text-sm md:text-base md:py-16 gap-3">
           {/* if users is empty */}
           {users.length === 0 && (
             <div className="flex justify-center items-center h-96">
@@ -199,7 +286,7 @@ function Home() {
                 <h1 className="text-4xl font-thin">No Users</h1>
                 <Link
                   to="/"
-                  className="text-2xl font-thin hover:underline transition-all duration-500 ease-in-out"
+                  className="text-2xl font-thin hover:underline transition-all duration-200 ease-in-out"
                 >
                   Try again later ⎋
                 </Link>
@@ -213,13 +300,13 @@ function Home() {
               href={`https://profile.intra.42.fr/users/${user.login}`}
               key={user.order}
               className={
-                "group flex items-center justify-between font-thin py-2 md:px-4 px-8 rounded hover:rounded-lg hover:bg-slate-600 hover:scale-105 hover:shadow-2xl hover:shadow-black hover:bg-opacity-30 hover:font-normal hover:text-white select-none transition-all duration-500 delay-0"
+                "group flex items-center justify-between font-normal py-2 md:px-4 px-8 hover:text-white border border-zinc-50/10 rounded-lg bg-zinc-500/25 hover:bg-zinc-600 backdrop-blur-xl select-none transition-all duration-200 delay-0 hover:shadow-lg hover:shadow-white/10"
               }
             >
               <div className="flex gap-4 justify-start items-center">
                 <h2 className="md:min-w-8 hidden md:block">#{user.order}</h2>
                 <img
-                  className="w-16 rounded-full aspect-square border group-hover:scale-105 transition-all duration-500 delay-0"
+                  className="w-16 rounded-full aspect-square border transition-all duration-200 delay-0"
                   src={user.image ? user.image : "/cat.png"}
                   alt="profile"
                 />

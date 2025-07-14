@@ -145,8 +145,6 @@ router.post("/cursus_users", async (context) => {
   const token = body.query.token;
   const currentPage = body.query.currentPage;
   const campus_name = body.query.campus_name;
-  //
-  // const campus_id: Number = await getCampusId(campus_name || "Tétouan", token);
   const CAMPUS_ID_MAP: { [key: string]: number } = {
     "Khouribga": 16,
     "Benguerir": 21,
@@ -164,13 +162,18 @@ router.post("/cursus_users", async (context) => {
       },
     });
     const data = await response.json();
-    const tempUsers = data.map((user: any, index: number) => ({
-      id: user.user.id,
-      order: currentPage * 100 - 99 + index,  // Pure calculation
-      login: user.user.login,
-      image: user.user.image.versions.medium,
-      lvl: user.level.toFixed(2),
-    }));
+    let tempUsers = [];
+    try {
+      tempUsers = data.map((user: any, index: number) => ({
+        id: user.user.id,
+        order: currentPage * 100 - 99 + index,  // Pure calculation
+        login: user.user.login,
+        image: user.user.image.versions.medium,
+        lvl: user.level.toFixed(2),
+      }));
+    } catch (mapError) {
+      console.log("Mapping error: ", mapError);
+    }
     context.response.body = {
       status: 200,
       data: tempUsers,
