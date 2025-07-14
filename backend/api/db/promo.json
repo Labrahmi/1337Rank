@@ -52,5 +52,68 @@
 			"id": 55,
 			"name": "Tétouan"
 		}
+	},
+	{
+		"pool_year": 2024,
+		"pool_month": "June",
+		"begin_at": "2024-06-24T08:37:00.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
+	},
+	{
+		"pool_year": 2024,
+		"pool_month": "July",
+		"begin_at": "2024-07-22T08:37:00.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
+	},
+	{
+		"pool_year": 2024,
+		"pool_month": "August",
+		"begin_at": "2024-08-26T09:37:00.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
+	},
+	{
+		"pool_year": 2022,
+		"pool_month": "March",
+		"begin_at": "2022-03-21T10:57:10.000Z",
+		"Campus": {
+			"id": 16,
+			"name": "Khouribga"
+		}
+	},
+	{
+		"pool_year": 2024,
+		"pool_month": "June",
+		"begin_at": "2024-06-24T09:37:00.000Z",
+		"Campus": {
+			"id": 21,
+			"name": "Benguerir"
+		}
+	},
+	{
+		"pool_year": 2023,
+		"pool_month": "August",
+		"begin_at": "2023-08-14T08:38:00.000Z",
+		"Campus": {
+			"id": 16,
+			"name": "Khouribga"
+		}
+	},
+	{
+		"pool_year": 2025,
+		"pool_month": "July",
+		"begin_at": "2025-07-14T08:37:00.000Z",
+		"Campus": {
+			"id": 55,
+			"name": "Tétouan"
+		}
 	}
 ]
