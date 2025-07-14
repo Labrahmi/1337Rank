@@ -11,90 +11,90 @@ interface User {
 }
 
 const mockUsers: User[] = [
-  {
-    order: 1,
-    login: "user_1",
-    image: "/profile.png",
-    lvl: 42,
-  },
-  {
-    order: 2,
-    login: "user_2",
-    image: "/profile.png",
-    lvl: 36,
-  },
-  {
-    order: 3,
-    login: "user_3",
-    image: "/profile.png",
-    lvl: 28,
-  },
-  {
-    order: 4,
-    login: "user_4",
-    image: "/profile.png",
-    lvl: 30,
-  },
-  {
-    order: 5,
-    login: "user_5",
-    image: "/profile.png",
-    lvl: 45,
-  },
-  {
-    order: 6,
-    login: "user_6",
-    image: "/profile.png",
-    lvl: 50,
-  },
-  {
-    order: 7,
-    login: "user_7",
-    image: "/profile.png",
-    lvl: 55,
-  },
-  {
-    order: 8,
-    login: "user_8",
-    image: "/profile.png",
-    lvl: 60,
-  },
-  {
-    order: 9,
-    login: "user_9",
-    image: "/profile.png",
-    lvl: 65,
-  },
-  {
-    order: 10,
-    login: "user_10",
-    image: "/profile.png",
-    lvl: 70,
-  },
-  {
-    order: 11,
-    login: "user_11",
-    image: "/profile.png",
-    lvl: 75,
-  },
-  {
-    order: 12,
-    login: "user_12",
-    image: "/profile.png",
-    lvl: 80,
-  },
-  {
-    order: 13,
-    login: "user_13",
-    image: "/profile.png",
-    lvl: 85,
-  },
-  {
-    order: 14,
-    login: "user_14",
-    image: "/profile.png",
-    lvl: 90,
-  },
+  // {
+  //   order: 1,
+  //   login: "user_1",
+  //   image: "/profile.png",
+  //   lvl: 42,
+  // },
+  // {
+  //   order: 2,
+  //   login: "user_2",
+  //   image: "/profile.png",
+  //   lvl: 36,
+  // },
+  // {
+  //   order: 3,
+  //   login: "user_3",
+  //   image: "/profile.png",
+  //   lvl: 28,
+  // },
+  // {
+  //   order: 4,
+  //   login: "user_4",
+  //   image: "/profile.png",
+  //   lvl: 30,
+  // },
+  // {
+  //   order: 5,
+  //   login: "user_5",
+  //   image: "/profile.png",
+  //   lvl: 45,
+  // },
+  // {
+  //   order: 6,
+  //   login: "user_6",
+  //   image: "/profile.png",
+  //   lvl: 50,
+  // },
+  // {
+  //   order: 7,
+  //   login: "user_7",
+  //   image: "/profile.png",
+  //   lvl: 55,
+  // },
+  // {
+  //   order: 8,
+  //   login: "user_8",
+  //   image: "/profile.png",
+  //   lvl: 60,
+  // },
+  // {
+  //   order: 9,
+  //   login: "user_9",
+  //   image: "/profile.png",
+  //   lvl: 65,
+  // },
+  // {
+  //   order: 10,
+  //   login: "user_10",
+  //   image: "/profile.png",
+  //   lvl: 70,
+  // },
+  // {
+  //   order: 11,
+  //   login: "user_11",
+  //   image: "/profile.png",
+  //   lvl: 75,
+  // },
+  // {
+  //   order: 12,
+  //   login: "user_12",
+  //   image: "/profile.png",
+  //   lvl: 80,
+  // },
+  // {
+  //   order: 13,
+  //   login: "user_13",
+  //   image: "/profile.png",
+  //   lvl: 85,
+  // },
+  // {
+  //   order: 14,
+  //   login: "user_14",
+  //   image: "/profile.png",
+  //   lvl: 90,
+  // },
 ]
 
 function Home() {
